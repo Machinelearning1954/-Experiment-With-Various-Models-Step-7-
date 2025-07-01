@@ -1,0 +1,127 @@
+# ML Capstone Project Configuration
+project:
+  name: "CIFAR-10 Multi-Model Comparison"
+  description: "Comprehensive comparison of various ML models on CIFAR-10 dataset"
+  author: "ML Engineering Bootcamp Student"
+  version: "1.0.0"
+
+# Dataset Configuration
+data:
+  dataset_name: "CIFAR-10"
+  num_classes: 10
+  input_shape: [3, 32, 32]
+  data_dir: "./data"
+  batch_size: 128
+  num_workers: 4
+  validation_split: 0.2
+  test_split: 0.1
+
+# Cross-validation Configuration
+cross_validation:
+  strategy: "stratified_kfold"
+  n_splits: 5
+  shuffle: true
+  random_state: 42
+
+# Performance Metrics
+metrics:
+  primary: "accuracy"
+  secondary: ["precision", "recall", "f1_score", "auc_roc"]
+  classification_report: true
+  confusion_matrix: true
+
+# Model Configurations
+models:
+  traditional_ml:
+    - name: "RandomForest"
+      type: "sklearn"
+      params:
+        n_estimators: [100, 200, 500]
+        max_depth: [10, 20, null]
+        min_samples_split: [2, 5, 10]
+    
+    - name: "XGBoost"
+      type: "xgboost"
+      params:
+        n_estimators: [100, 200, 500]
+        max_depth: [3, 6, 10]
+        learning_rate: [0.01, 0.1, 0.2]
+    
+    - name: "LightGBM"
+      type: "lightgbm"
+      params:
+        n_estimators: [100, 200, 500]
+        max_depth: [3, 6, 10]
+        learning_rate: [0.01, 0.1, 0.2]
+
+  deep_learning:
+    - name: "SimpleCNN"
+      type: "pytorch"
+      architecture: "custom_cnn"
+      params:
+        learning_rate: [0.001, 0.01, 0.1]
+        batch_size: [64, 128, 256]
+        epochs: 50
+    
+    - name: "ResNet18"
+      type: "pytorch"
+      architecture: "resnet18"
+      params:
+        learning_rate: [0.001, 0.01]
+        batch_size: [64, 128]
+        epochs: 50
+        pretrained: [true, false]
+    
+    - name: "VGG16"
+      type: "pytorch"
+      architecture: "vgg16"
+      params:
+        learning_rate: [0.001, 0.01]
+        batch_size: [64, 128]
+        epochs: 50
+        pretrained: [true, false]
+    
+    - name: "DenseNet121"
+      type: "pytorch"
+      architecture: "densenet121"
+      params:
+        learning_rate: [0.001, 0.01]
+        batch_size: [64, 128]
+        epochs: 50
+        pretrained: [true, false]
+
+# Training Configuration
+training:
+  device: "cuda"  # Will fallback to CPU if CUDA not available
+  mixed_precision: true
+  gradient_clipping: 1.0
+  early_stopping:
+    patience: 10
+    min_delta: 0.001
+  
+# Hyperparameter Tuning
+hyperparameter_tuning:
+  method: "optuna"
+  n_trials: 50
+  timeout: 3600  # 1 hour per model
+  pruning: true
+
+# Experiment Tracking
+experiment_tracking:
+  use_mlflow: true
+  use_tensorboard: true
+  log_models: true
+  log_artifacts: true
+  
+# Ensemble Configuration
+ensemble:
+  methods: ["voting", "stacking", "bagging"]
+  base_models: ["best_cnn", "best_resnet", "best_vgg"]
+  
+# Output Configuration
+output:
+  results_dir: "./results"
+  models_dir: "./models"
+  plots_dir: "./results/plots"
+  reports_dir: "./results/reports"
+

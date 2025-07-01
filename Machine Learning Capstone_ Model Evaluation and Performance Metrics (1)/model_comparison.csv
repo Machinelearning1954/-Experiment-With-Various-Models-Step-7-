@@ -1,0 +1,7 @@
+Model,Test Accuracy,Training Time (s),Parameters,Model Size (MB),F1 Score (Macro),Precision (Macro),Recall (Macro),CV Accuracy (Mean),CV Accuracy (Std),Overfitting Gap
+DenseNet121,86.2,523.1,6956298,26.5,0.86,0.87,0.86,85.4,1.6,3.1
+ResNet18,84.7,412.3,11689512,44.6,0.84,0.85,0.84,83.9,1.8,4.2
+VGG16,82.1,687.9,138357544,527.8,0.81,0.82,0.81,81.3,2.3,6.8
+SimpleCNN,68.3,245.6,1247832,4.8,0.67,0.69,0.68,67.1,2.1,8.5
+XGBoost,45.2,28.7,N/A,N/A,0.44,0.46,0.45,44.6,1.5,3.2
+RandomForest,42.5,15.3,N/A,N/A,0.41,0.43,0.42,41.8,1.2,2.1
